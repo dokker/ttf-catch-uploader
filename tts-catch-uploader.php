@@ -27,6 +27,11 @@ function __tts_catch_uploader_load_plugin()
 	// load translations
 	load_plugin_textdomain( 'tts-catch-uploader', false, 'tts-catch-uploader/languages' );
 
+	$catches = new cncTTS\ContentType('catch',
+		['menu_icon' => 'dashicons-camera', 'has_archive' => true, 'supports' => ['title']],
+		['singular_name' => __('Catch', 'tts-catch-uploader'), 'plural_name' => __('Catches', 'tts-catch-uploader')],
+		_x('catches', 'catches archive slug', 'tts-catch-uploader'));
+
 	// instantiate classes to register hooks
 	// require_once('inc/cncTTS/Controller.php');
 	$controller = new cncTTS\Controller();
