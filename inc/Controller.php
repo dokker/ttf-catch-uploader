@@ -3,6 +3,8 @@ namespace cncTTS;
 
 class Controller {
 	public function __construct() {
+		// Register ACF fields
+		$acf = new cncTTS\ACF();
 		add_filter('acf/update_value', [$this, 'tts_kses_post'], 10, 1);
 		add_action( 'get_header', [$this, 'tsm_do_acf_form_head'], 1 );
 		add_shortcode('cnc_tts_upload_form', [$this, 'shortcodeUploadForm']);
