@@ -9,6 +9,7 @@ class Controller {
 		// Register ACF fields
 		$this->acf = new ACF();
 		$this->view = new View();
+		add_action('wp_enqueue_scripts', [$this, 'registerScripts']);
 		add_action('acf/init', [$this, 'tts_set_google_api']);
 		add_filter('acf/update_value', [$this, 'tts_kses_post'], 10, 1);
 		add_action( 'get_header', [$this, 'tsm_do_acf_form_head'], 1 );
@@ -16,8 +17,17 @@ class Controller {
 		add_filter('single_template', [$this, 'tts_catch_single_template']);
 	}
 
+	public function registerScripts()
+	{
+		wp_register_script('tts-catch-main-js', $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/js/main.js', array('jquery'));
+		wp_register_script('tts-catch-upload-js', $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/js/upload.js', array('jquery'));
+		wp_register_script('tts-googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=' . $this->tts_config['google_api_key'], null, null, true);
+	}
+
 	public function shortcodeUploadForm()
 	{
+		wp_enqueue_script('tts-catch-upload-js');
+
 		if (!is_user_logged_in()) {
 			$notloggedin = $this->view->render('tts-notloggedin');
 			return $notloggedin;
@@ -98,6 +108,8 @@ class Controller {
 	 */
 	function tts_catch_single_template( $template ) {
 		if(get_post_type() == 'catch') {
+			wp_enqueue_script('tts-googlemaps');
+			wp_enqueue_style($this->plugin_url . DIRECTORY_SEPARATOR . 'assets/css/main.css');
 			$template = $this->plugin_url . DIRECTORY_SEPARATOR . 'templates/single-catch.php';
 			if (file_exists($template)) {
 				return $template;
