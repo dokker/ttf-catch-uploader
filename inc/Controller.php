@@ -3,9 +3,12 @@ namespace cncTTS;
 
 class Controller {
 	public function __construct() {
+		$this->tts_config = include(plugin_dir_path(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
+
 		// Register ACF fields
 		$this->acf = new ACF();
 		$this->view = new View();
+		add_action('acf/init', 'tts_set_google_api');
 		add_filter('acf/update_value', [$this, 'tts_kses_post'], 10, 1);
 		add_action( 'get_header', [$this, 'tsm_do_acf_form_head'], 1 );
 		add_shortcode('cnc_tts_upload_form', [$this, 'shortcodeUploadForm']);
@@ -63,5 +66,13 @@ class Controller {
 			return;
 		}
 		acf_form_head();
+	}
+
+	/**
+	 * Set ACF google map API key
+	 */
+	public function tts_set_google_api()
+	{
+		acf_update_setting('google_api_key', $this->tts_config['google_api_key']);
 	}
 }
