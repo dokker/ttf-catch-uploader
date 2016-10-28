@@ -12,7 +12,7 @@ class Controller {
 		add_action('wp_enqueue_scripts', [$this, 'registerScripts']);
 		add_action('acf/init', [$this, 'tts_set_google_api']);
 		add_filter('acf/update_value', [$this, 'tts_kses_post'], 10, 1);
-		add_action( 'get_header', [$this, 'tsm_do_acf_form_head'], 1 );
+		add_action( 'get_header', [$this, 'tts_do_acf_form_head'], 1 );
 		add_shortcode('cnc_tts_upload_form', [$this, 'shortcodeUploadForm']);
 		add_filter('single_template', [$this, 'tts_catch_single_template']);
 	}
