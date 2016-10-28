@@ -3,7 +3,7 @@ namespace cncTTS;
 
 class Controller {
 	public function __construct() {
-		$this->tts_config = include(plugin_dir_path(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
+		$this->readConfig();
 
 		// Register ACF fields
 		$this->acf = new ACF();
@@ -73,6 +73,20 @@ class Controller {
 	 */
 	public function tts_set_google_api()
 	{
+		var_dump($this->tts_config['google_api_key']);
 		acf_update_setting('google_api_key', $this->tts_config['google_api_key']);
+	}
+
+	/**
+	 * Read configuration from file
+	 */
+	private function readConfig()
+	{
+		$config_path = plugin_dir_path(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php';
+		if (file_exists($config_path)) {
+			$this->tts_config = include($config_path);
+		} else {
+			trigger_error('Config file missing', E_USER_WARNING);
+		}
 	}
 }
