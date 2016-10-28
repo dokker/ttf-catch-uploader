@@ -3,6 +3,7 @@ namespace cncTTS;
 
 class Controller {
 	public function __construct() {
+		$this->plugin_url = plugin_dir_path(dirname(__FILE__));
 		$this->readConfig();
 
 		// Register ACF fields
@@ -82,7 +83,7 @@ class Controller {
 	 */
 	private function readConfig()
 	{
-		$config_path = plugin_dir_path(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php';
+		$config_path = $this->plugin_url . DIRECTORY_SEPARATOR . 'config.php';
 		if (file_exists($config_path)) {
 			$this->tts_config = include($config_path);
 		} else {
@@ -97,7 +98,7 @@ class Controller {
 	 */
 	function tts_catch_single_template( $template ) {
 		if(get_post_type() == 'catch') {
-			$template = plugin_dir_path(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'templates/single-catch.php';
+			$template = $this->plugin_url . DIRECTORY_SEPARATOR . 'templates/single-catch.php';
 			if (file_exists($template)) {
 				return $template;
 			} else {
