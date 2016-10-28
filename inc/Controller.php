@@ -12,6 +12,7 @@ class Controller {
 		add_filter('acf/update_value', [$this, 'tts_kses_post'], 10, 1);
 		add_action( 'get_header', [$this, 'tsm_do_acf_form_head'], 1 );
 		add_shortcode('cnc_tts_upload_form', [$this, 'shortcodeUploadForm']);
+		add_filter('single_template', [$this, 'tts_catch_single_template']);
 	}
 
 	public function shortcodeUploadForm()
@@ -88,4 +89,22 @@ class Controller {
 			trigger_error('Config file missing', E_USER_WARNING);
 		}
 	}
+
+	/**
+	 * Give the single catch content type template file
+	 * @param  string $template Template file path
+	 * @return string           Template file path
+	 */
+	function tts_catch_single_template( $template ) {
+		if(get_post_type() == 'catch') {
+			$template = plugin_dir_path(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'templates/single-catch.php';
+			if (file_exists($template)) {
+				return $template;
+			} else {
+				trigger_error('Failed to load single-catch template', E_USER_NOTICE);
+			}
+		}
+		return $template;
+	}
+
 }
