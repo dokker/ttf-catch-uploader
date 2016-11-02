@@ -3,7 +3,8 @@ namespace cncTTS;
 
 class Controller {
 	public function __construct() {
-		$this->plugin_url = plugin_dir_path(dirname(__FILE__));
+		$this->plugin_path = plugin_dir_path(dirname(__FILE__));
+		$this->plugin_url = plugin_dir_url(dirname(__FILE__));
 		$this->readConfig();
 
 		// Register ACF fields
@@ -93,7 +94,7 @@ class Controller {
 	 */
 	private function readConfig()
 	{
-		$config_path = $this->plugin_url . DIRECTORY_SEPARATOR . 'config.php';
+		$config_path = $this->plugin_path . DIRECTORY_SEPARATOR . 'config.php';
 		if (file_exists($config_path)) {
 			$this->tts_config = include($config_path);
 		} else {
@@ -110,7 +111,7 @@ class Controller {
 		if(get_post_type() == 'catch') {
 			wp_enqueue_script('tts-googlemaps');
 			wp_enqueue_style($this->plugin_url . DIRECTORY_SEPARATOR . 'assets/css/main.css');
-			$template = $this->plugin_url . DIRECTORY_SEPARATOR . 'templates/single-catch.php';
+			$template = $this->plugin_path . DIRECTORY_SEPARATOR . 'templates/single-catch.php';
 			if (file_exists($template)) {
 				return $template;
 			} else {
