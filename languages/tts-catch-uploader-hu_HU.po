@@ -1,0 +1,94 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TTS Catch Uploader\n"
+"POT-Creation-Date: 2016-11-03 11:03+0100\n"
+"PO-Revision-Date: 2016-11-03 11:04+0100\n"
+"Last-Translator: docker <dock3r@gmail.com>\n"
+"Language-Team: colorandcode <denes@colrandcode.hu>\n"
+"Language: hu_HU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.9\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/ContentType.php:52 inc/ContentType.php:53
+#, php-format
+msgid "Add new %s"
+msgstr "Új %s"
+
+#: inc/ContentType.php:54
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: inc/ContentType.php:55
+#, php-format
+msgid "Edit %s"
+msgstr "%s szerkesztése"
+
+#: inc/ContentType.php:56
+#, php-format
+msgid "New %s"
+msgstr "Új %s"
+
+#: inc/ContentType.php:57
+#, php-format
+msgid "View %s Page"
+msgstr "%s oldal megtekintése"
+
+#: inc/ContentType.php:58
+#, php-format
+msgid "View %s"
+msgstr "%s megtekintése"
+
+#: inc/ContentType.php:59
+#, php-format
+msgid "Search %s"
+msgstr "%s keresése"
+
+#: inc/ContentType.php:60
+#, php-format
+msgid "No matching %s found"
+msgstr "Nincs megfelelő %s"
+
+#: inc/ContentType.php:61
+#, php-format
+msgid "No %s found in Trash"
+msgstr "Nincs megfelelő %s a kukában"
+
+#: inc/ContentType.php:62
+#, php-format
+msgid "Parent %s"
+msgstr "Szülő %s"
+
+#: inc/Controller.php:44
+msgid "Upload catch"
+msgstr "Fogás feltöltése"
+
+#: inc/Controller.php:45
+msgid "Catch saved."
+msgstr "Fogás elmentve."
+
+#: templates/tts-notloggedin.tpl.php:2
+msgid "Only logged in users can register new catch."
+msgstr "Csak bejelentkezett felhasználók rögzíthetnek új fogást."
+
+#: templates/tts-notloggedin.tpl.php:3
+msgid "Login"
+msgstr "Bejelentkezés"
+
+#: tts-catch-uploader.php:32
+msgid "Catch"
+msgstr "Fogás"
+
+#: tts-catch-uploader.php:32
+msgid "Catches"
+msgstr "Fogások"
+
+#: tts-catch-uploader.php:33
+msgctxt "catches archive slug"
+msgid "catches"
+msgstr "fogasok"
