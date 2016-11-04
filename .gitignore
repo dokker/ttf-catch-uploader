@@ -2,5 +2,4 @@ composer.lock
 vendor
 config.php
 languages/*.mo
-bower_components/*
 bs-config.js
