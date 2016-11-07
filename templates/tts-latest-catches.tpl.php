@@ -4,7 +4,10 @@
 			<div class="catch-container">
 				<?php $photo = get_field('catch_photo', $catch->ID); ?>
 				<a href="<?php echo  get_permalink($catch->ID); ?>">
-					<img src="<?php echo $photo['sizes']['cnc-catch-recent']; ?>" alt="<?php echo $photo['alt']; ?>" />
+					<figure>
+						<img src="<?php echo $photo['sizes']['cnc-catch-recent']; ?>" alt="<?php echo $photo['alt']; ?>" />
+						<figcaption><?php echo $catch->post_title; ?></figcaption>
+					</figure>
 				</a>
 			</div>
 		<?php endforeach; ?>
