@@ -1,6 +1,24 @@
 (function($) {
 
-$(".carousel-container").owlCarousel();
+$(".carousel-container").owlCarousel({
+	nav: true,
+	margin: 10,
+	center: true,
+	loop: true,
+	responsiveClass:true,
+	dots: false,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:4
+        }
+    }
+});
 
 /*
 *  This function will render a Google Map onto the selected jQuery element
