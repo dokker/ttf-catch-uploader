@@ -1,5 +1,7 @@
 (function($) {
 
+$(".carousel-container").owlCarousel();
+
 /*
 *  This function will render a Google Map onto the selected jQuery element
 *

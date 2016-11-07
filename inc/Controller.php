@@ -10,19 +10,28 @@ class Controller {
 		// Register ACF fields
 		$this->acf = new ACF();
 		$this->view = new View();
+		$this->model = new Model();
 		add_action('wp_enqueue_scripts', [$this, 'registerScripts']);
 		add_action('acf/init', [$this, 'tts_set_google_api']);
 		add_filter('acf/update_value', [$this, 'tts_kses_post'], 10, 1);
 		add_action( 'get_header', [$this, 'tts_do_acf_form_head'], 1 );
 		add_shortcode('cnc_tts_upload_form', [$this, 'shortcodeUploadForm']);
+		add_shortcode('cnc_tts_recent_catches', [$this, 'shortcodeLatestCatches']);
 		add_filter('single_template', [$this, 'tts_catch_single_template']);
+		add_image_size( 'cnc-catch-recent', 260, 180, true );
 	}
 
 	public function registerScripts()
 	{
-		wp_register_script('tts-catch-main-js', $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/js/main.js', array('jquery'));
-		wp_register_script('tts-catch-upload-js', $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/js/upload.js', array('jquery'));
+		wp_register_script('tts-catch-main-js', $this->plugin_url . 'assets/js/main.js', array('jquery'), '1', true);
+		wp_register_script('tts-catch-upload-js', $this->plugin_url . 'assets/js/upload.js', array('jquery'));
 		wp_register_script('tts-googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=' . $this->tts_config['google_api_key'], null, null, true);
+
+		wp_register_script('owlcarousel', $this->plugin_url . 'assets/owlcarousel/owl.carousel.min.js', array('jquery'), '1', true);
+		wp_register_style('owlcarousel', $this->plugin_url . 'assets/owlcarousel/owl.carousel.css', array());
+		wp_register_style('owlcarousel-theme', $this->plugin_url . 'assets/owlcarousel/owl.theme.default.min.css', array());
+		wp_enqueue_style('owlcarousel');
+		wp_enqueue_style('owlcarousel-theme');
 	}
 
 	public function shortcodeUploadForm()
@@ -46,6 +55,15 @@ class Controller {
 			'uploader'	=> 'basic',
 			'honeypot'	=> true,
 		));
+	}
+
+	public function shortcodeLatestCatches()
+	{
+		wp_enqueue_script('owlcarousel');
+		wp_enqueue_script('tts-catch-main-js');
+		$catches = $this->model->getLatestCatches(10);
+		$this->view->assign('catches', $catches);
+		return $this->view->render('tts-latest-catches');
 	}
 
 
