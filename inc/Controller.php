@@ -26,12 +26,13 @@ class Controller {
 		wp_register_script('tts-catch-main-js', $this->plugin_url . 'assets/js/main.js', array('jquery'), '1', true);
 		wp_register_script('tts-catch-upload-js', $this->plugin_url . 'assets/js/upload.js', array('jquery'));
 		wp_register_script('tts-googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=' . $this->tts_config['google_api_key'], null, null, true);
+		wp_register_style('tts-main', $this->plugin_url . 'assets/css/main.css', array());
+		wp_enqueue_style('tts-main');
 
 		wp_register_script('owlcarousel', $this->plugin_url . 'assets/owlcarousel/owl.carousel.min.js', array('jquery'), '1', true);
 		wp_register_style('owlcarousel', $this->plugin_url . 'assets/owlcarousel/owl.carousel.css', array());
 		wp_register_style('owlcarousel-theme', $this->plugin_url . 'assets/owlcarousel/owl.theme.default.min.css', array());
 		wp_enqueue_style('owlcarousel');
-		wp_enqueue_style('owlcarousel-theme');
 	}
 
 	public function shortcodeUploadForm()
@@ -128,7 +129,6 @@ class Controller {
 	function tts_catch_single_template( $template ) {
 		if(get_post_type() == 'catch') {
 			wp_enqueue_script('tts-googlemaps');
-			wp_enqueue_style($this->plugin_url . DIRECTORY_SEPARATOR . 'assets/css/main.css');
 			$template = $this->plugin_path . DIRECTORY_SEPARATOR . 'templates/single-catch.php';
 			if (file_exists($template)) {
 				return $template;

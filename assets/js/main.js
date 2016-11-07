@@ -2,11 +2,11 @@
 
 $(".carousel-container").owlCarousel({
 	nav: true,
-	margin: 10,
 	center: true,
 	loop: true,
 	responsiveClass:true,
 	dots: false,
+	navText: ["<span><</span>", "<span>></span>"],
     responsive:{
         0:{
             items:1
