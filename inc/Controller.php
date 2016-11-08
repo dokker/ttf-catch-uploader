@@ -19,6 +19,17 @@ class Controller {
 		add_shortcode('cnc_tts_recent_catches', [$this, 'shortcodeLatestCatches']);
 		add_filter('single_template', [$this, 'tts_catch_single_template']);
 		add_image_size( 'cnc-catch-recent', 260, 180, true );
+
+		// acf/update_value/name={$field_name} - filter for a specific field based on it's name
+		add_filter('acf/update_value/name=catch_photo', [$this, 'acf_set_featured_image'], 10, 3);
+	}
+
+	public function acf_set_featured_image( $value, $post_id, $field  ){
+		if($value != ''){
+		    //Add the value which is the image ID to the _thumbnail_id meta data for the current post
+			add_post_meta($post_id, '_thumbnail_id', $value);
+		}
+		return $value;
 	}
 
 	public function registerScripts()
