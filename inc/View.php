@@ -3,6 +3,8 @@ namespace cncTTS;
 
 class View {
 
+	private $data = array();
+
 	function __construct()
 	{
 
