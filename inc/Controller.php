@@ -139,7 +139,8 @@ class Controller {
 	 */
 	function tts_catch_single_template( $template ) {
 		if(get_post_type() == 'catch') {
-			wp_enqueue_script('tts-googlemaps');
+			// Duplicate gmaps script
+			// wp_enqueue_script('tts-googlemaps');
 			$template = $this->plugin_path . DIRECTORY_SEPARATOR . 'templates/single-catch.php';
 			if (file_exists($template)) {
 				return $template;
