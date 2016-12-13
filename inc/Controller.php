@@ -37,6 +37,9 @@ class Controller {
 		wp_register_script('tts-catch-main-js', $this->plugin_url . 'assets/js/main.js', array('jquery'), '1', true);
 		wp_register_script('tts-catch-upload-js', $this->plugin_url . 'assets/js/upload.js', array('jquery'));
 		wp_register_script('tts-googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=' . $this->tts_config['google_api_key'], null, null, true);
+		if(get_post_type() == 'catch') {
+			wp_enqueue_script('tts-googlemaps');
+		}
 		wp_register_style('tts-main', $this->plugin_url . 'assets/css/main.css', array());
 		wp_enqueue_style('tts-main');
 
@@ -139,8 +142,6 @@ class Controller {
 	 */
 	function tts_catch_single_template( $template ) {
 		if(get_post_type() == 'catch') {
-			// Duplicate gmaps script
-			// wp_enqueue_script('tts-googlemaps');
 			$template = $this->plugin_path . DIRECTORY_SEPARATOR . 'templates/single-catch.php';
 			if (file_exists($template)) {
 				return $template;
